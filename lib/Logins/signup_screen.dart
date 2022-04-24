@@ -1,14 +1,13 @@
-import 'package:but1st_boba/Logins/signup_screen.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -29,15 +28,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 _emailField(),
                 const SizedBox(height: 40),
                 _passwordField(),
-                _forgetPasswordText(),
                 const SizedBox(height: 40),
                 _loginButton(),
                 const SizedBox(height: 20),
                 _orText(),
-                const SizedBox(height: 25),
-                _loginWithLogos(),
-                const SizedBox(height: 20),
-                _signUpText(),
               ],
             ),
           ),
@@ -69,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
-          validator: validateEmail,
+          // validator: validateEmail,
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
@@ -93,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
-          validator: validatePassword,
+          // validator: validatePassword,
           obscureText: true,
           decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
@@ -107,24 +101,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 Icons.mail,
                 color: Colors.black,
               )),
-        ),
-      ],
-    );
-  }
-
-  _forgetPasswordText() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        TextButton(
-          child: const Text(
-            'Forget Password?',
-            style: TextStyle(
-                fontFamily: 'RobotoSlab',
-                color: Colors.black,
-                letterSpacing: 1.2),
-          ),
-          onPressed: () {},
         ),
       ],
     );
@@ -181,71 +157,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ],
     );
   }
-
-  _loginWithLogos() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: const [
-        CircleAvatar(
-          backgroundImage: AssetImage('lib/assets/images/facebook.png'),
-          foregroundColor: Colors.black12,
-          radius: 40.0,
-        ),
-        CircleAvatar(
-          backgroundImage: AssetImage('lib/assets/images/google.png'),
-          foregroundColor: Colors.black12,
-          radius: 40.0,
-        ),
-      ],
-    );
-  }
-
-  _signUpText() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(
-          'Didn\'t have an account?',
-          style: TextStyle(
-            fontSize: 18.0,
-            letterSpacing: 1.4,
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const SignupScreen()));
-          },
-          child: const Text(
-            'Create',
-            style: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-String? validateEmail(String? formEmail) {
-  if (formEmail == null || formEmail.isEmpty) {
-    return 'Required';
-  }
-
-  String pattern = r'\w+@\w+\.\w+';
-  RegExp regex = RegExp(pattern);
-  if (!regex.hasMatch(formEmail)) {
-    return 'Invalid E-mail Format';
-  }
-
-  return null;
-}
-
-String? validatePassword(String? formPassword) {
-  if (formPassword == null || formPassword.isEmpty) {
-    return 'Required.';
-  }
-  return null;
 }
